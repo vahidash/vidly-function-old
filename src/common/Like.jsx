@@ -1,4 +1,4 @@
-export default ({ liked, onClick }) => {
+const Like = ({ liked, onClick }) => {
   return (
     <i
       className={liked ? "fa fa-heart clickable" : "fa fa-heart-o clickable"}
@@ -6,3 +6,5 @@ export default ({ liked, onClick }) => {
     ></i>
   );
 };
+
+export default Like;

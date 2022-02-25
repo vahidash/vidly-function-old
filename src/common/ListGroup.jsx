@@ -1,4 +1,4 @@
-export default ({ items, selectedItem, onItemSelect }) => {
+const ListGroup = ({ items, selectedItem, onItemSelect }) => {
   return (
     <ul className="list-group">
       {items.map((item) => (
@@ -6,7 +6,7 @@ export default ({ items, selectedItem, onItemSelect }) => {
           key={item._id}
           onClick={() => onItemSelect(item)}
           className={
-            item == selectedItem ? "list-group-item active" : "list-group-item"
+            item === selectedItem ? "list-group-item active" : "list-group-item"
           }
         >
           {item.name}
@@ -15,3 +15,5 @@ export default ({ items, selectedItem, onItemSelect }) => {
     </ul>
   );
 };
+
+export default ListGroup;

@@ -1,8 +1,12 @@
+import { useContext } from "react";
+import MoviesContext from "../contexts/moviesContext";
 import _ from "lodash";
 
-export default ({ itemsCount, currentPage, pageSize, onPageChange }) => {
-  const pagesCount = Math.ceil(itemsCount / pageSize);
-  if (pagesCount == 1) return null;
+const Pagination = ({ itemsCount, currentPage, pageSize, onPageChange }) => {
+  const ctx = useContext(MoviesContext);
+
+  const pagesCount = Math.ceil(ctx.itemsCount / ctx.pageSize);
+  if (pagesCount === 1) return null;
   const pages = _.range(1, pagesCount + 1);
 
   return (
@@ -12,12 +16,12 @@ export default ({ itemsCount, currentPage, pageSize, onPageChange }) => {
           <li
             key={page}
             className={
-              page == currentPage
+              page === ctx.currentPage
                 ? "page-item active clickable"
                 : "page-item clickable"
             }
           >
-            <a onClick={() => onPageChange(page)} className="page-link">
+            <a onClick={() => ctx.onPageChange(page)} className="page-link">
               {page}
             </a>
           </li>
@@ -26,3 +30,5 @@ export default ({ itemsCount, currentPage, pageSize, onPageChange }) => {
     </nav>
   );
 };
+
+export default Pagination;
