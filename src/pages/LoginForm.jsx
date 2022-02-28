@@ -1,9 +1,13 @@
 import { useState } from "react";
 import Joi from "joi";
 import Input from "../common/Input";
+import Form from "../common/Form";
 
 const LoginForm = () => {
-  const [account, setAccount] = useState({ username: "", password: "" });
+  const title = "Login";
+  const account = { username: "", password: "" };
+
+  const [account, setAccount] = useState();
   const [errors, setErrors] = useState({});
   const schema = Joi.object({
     username: Joi.string().required(),
@@ -49,28 +53,37 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Login</h1>
-      <Input
-        name="username"
-        label="Username"
-        value={account.username}
-        onChange={handleChange}
-        error={errors.username}
-      />
-      {console.log(account, errors)}
-      <Input
-        name="password"
-        label="Password"
-        value={account.password}
-        onChange={handleChange}
-        error={errors.password}
-      />
-
-      <button disabled={validateForm()} className="btn btn-primary">
-        Login
-      </button>
-    </form>
+    <dive>
+      <Form
+        title="Login"
+        initData={{ username: "", password: "" }}
+        schema={Joi.object({
+          username: Joi.string().required(),
+          password: Joi.string().required(),
+        })}
+      ></Form>
+      <form onSubmit={handleSubmit}>
+        <h1>Login</h1>
+        <Input
+          name="username"
+          label="Username"
+          value={account.username}
+          onChange={handleChange}
+          error={errors.username}
+        />
+        {console.log(account, errors)}
+        <Input
+          name="password"
+          label="Password"
+          value={account.password}
+          onChange={handleChange}
+          error={errors.password}
+        />
+        <button disabled={validateForm()} className="btn btn-primary">
+          Login
+        </button>
+      </form>
+    </dive>
   );
 };
 
