@@ -48,28 +48,31 @@ const LoginForm = () => {
     });
   };
 
+  const renderInput = (name, label) => {
+    <Input
+      name={name}
+      label={label}
+      value={account[name]}
+      onChange={handleChange}
+      error={errors[name]}
+    />;
+  };
+  const renderButton = (label) => {
+    return (
+      <button disabled={validateForm()} className="btn btn-primary">
+        {label}
+      </button>
+    );
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <h1>Login</h1>
-      <Input
-        name="username"
-        label="Username"
-        value={account.username}
-        onChange={handleChange}
-        error={errors.username}
-      />
-      {console.log(account, errors)}
-      <Input
-        name="password"
-        label="Password"
-        value={account.password}
-        onChange={handleChange}
-        error={errors.password}
-      />
+      {renderInput("username", "Username")}
+      {renderInput("password", "Password")}
+      {renderButton("Login")}
 
-      <button disabled={validateForm()} className="btn btn-primary">
-        Login
-      </button>
+      {console.log(account, errors)}
     </form>
   );
 };
