@@ -49,14 +49,17 @@ const LoginForm = () => {
   };
 
   const renderInput = (name, label) => {
-    <Input
-      name={name}
-      label={label}
-      value={account[name]}
-      onChange={handleChange}
-      error={errors[name]}
-    />;
+    return (
+      <Input
+        name={name}
+        label={label}
+        value={account[name]}
+        onChange={handleChange}
+        error={errors[name]}
+      />
+    );
   };
+
   const renderButton = (label) => {
     return (
       <button disabled={validateForm()} className="btn btn-primary">
@@ -68,10 +71,10 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <h1>Login</h1>
-      {renderInput("username", "Username")}
-      {renderInput("password", "Password")}
+      {Object.keys(account).map((key) => {
+        return renderInput(key, key);
+      })}
       {renderButton("Login")}
-
       {console.log(account, errors)}
     </form>
   );
